@@ -8,6 +8,10 @@
 - configured tailwild css 
 -- npm install -D @tailwindcss/vite
 
+- Header
+- Login 
+-- Sign in / Sign up form
+
 # FEATURE
 
 - LogIn/SignUp
