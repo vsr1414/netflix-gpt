@@ -8,9 +8,12 @@
 - configured tailwild css 
 -- npm install -D @tailwindcss/vite
 
+- Routing
 - Header
 - Login 
 -- Sign in / Sign up form
+-- Form validation
+-- UseRef
 
 # FEATURE
 

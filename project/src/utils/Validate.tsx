@@ -1,8 +1,8 @@
-export const CheckValidation = (email: string, password: string, userName?: string) => {
-    const trimmedEmail = email?.trim() ?? "";
-    const trimmedPassword = password?.trim() ?? "";
+export const CheckValidation = (email: any, password: any, userName?: any) => {
+    const trimmedEmail = email.current.value?.trim() ?? "";
+    const trimmedPassword = password.current.value?.trim() ?? "";
 
-    if (userName !== undefined && userName.trim() === "") {
+    if (userName !== undefined && userName.current.value.trim() === "") {
         return { valid: false, message: "Username is required" };
     }
 

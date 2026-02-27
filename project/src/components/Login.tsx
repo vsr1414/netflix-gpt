@@ -19,7 +19,7 @@ const Login = () => {
 
     const handleSubmit = () => {
         if(email && password) {
-            const formValidation = CheckValidation(email?.current?.value, password.current.value, showSignInForm ? undefined : userName.current.value);
+            const formValidation = CheckValidation(email, password, showSignInForm ? undefined : userName);
             if(!formValidation.valid) {
                 setValidationMessage(formValidation.message);
                 return;
