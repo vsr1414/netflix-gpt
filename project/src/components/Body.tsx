@@ -11,6 +11,10 @@ const Body = () => {
             element: <Login/>
         },
         {
+            path: "/home",
+            element: <Login/>
+        },
+        {
             path: "/browse",
             element: <Browse/>
         },

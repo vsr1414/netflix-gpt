@@ -3,18 +3,55 @@ import { useState, useRef} from "react";
 import Header from "./Header";
 import BannerImage from "../assets/banner_image.jpeg";
 import { CheckValidation } from "../utils/Validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {auth } from "../utils/common-service";
+import { useNavigate } from "react-router-dom";
+
+
 
 
 const Login = () => {
     const [showSignInForm, setShowSignInForm] = useState(true);
     const [validationMessage, setValidationMessage] = useState("");
-
+    const navigate = useNavigate();
     const userName = useRef(null);
-    const email = useRef(null);
-    const password = useRef(null);
+    const email = useRef<HTMLInputElement>(null);
+    const password = useRef<HTMLInputElement>(null);
 
     const toggleSignIn = () => {
         setShowSignInForm(!showSignInForm);
+    }
+
+    const signUp = () => {
+        createUserWithEmailAndPassword(auth, email.current?.value ?? "", password.current?.value ?? "")
+            .then((userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                navigate("/browse", { replace: true });
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setValidationMessage(errorCode + " - " + errorMessage);
+                // ..
+            }
+        );
+    }
+
+    const signIn = () => {
+        signInWithEmailAndPassword(auth, email.current?.value ?? "", password.current?.value ?? "")
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                navigate("/browse", { replace: true });
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setValidationMessage(errorCode + " - " + errorMessage);
+        });
     }
 
     const handleSubmit = () => {
@@ -25,6 +62,7 @@ const Login = () => {
                 return;
             } else {
                 setValidationMessage("");
+                showSignInForm ? signIn() : signUp();
             }
         }
     } 
